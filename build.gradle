@@ -1,0 +1,16 @@
+task wrapper(type: Wrapper) {
+    description = "Updates gradlew and supporting files."
+    gradleVersion = '2.3'
+}
+
+subprojects { 
+    apply plugin: "eclipse"
+    eclipse {
+        classpath {
+            downloadJavadoc=true
+        }
+        project {
+            name = it.name.replace('/', '-');
+        }
+    }
+}

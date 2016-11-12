@@ -1,0 +1,5 @@
+A set of scripts and programs that will verify that Wombat is
+replicating data correctly. It does this by loading the entire Kafka
+stream back into a mysql instance, and comparing the source MySQL
+tables vs the MySQL tables loaded from Kafka.
+

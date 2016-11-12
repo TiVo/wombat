@@ -1,0 +1,11 @@
+FROM stealthly/docker-java
+
+MAINTAINER jcheng@tivo.com
+
+# Adding binaries
+COPY build/libs/replicator.jar /replicator.jar
+
+# This creates the config file, and then runs the code.
+COPY docker_entrypoint.quickstart.sh /docker_entrypoint.quickstart.sh
+
+ENTRYPOINT ["/docker_entrypoint.quickstart.sh"]

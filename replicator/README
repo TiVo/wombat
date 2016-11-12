@@ -1,0 +1,31 @@
+Here are the environment variables you can set when running the docker image.
+
+MYSQL_SOURCE_IDENTIFIER
+        Required. This string is attached to all the MySQL messages
+        that are replicated out to Kafka. It is used to figure out
+        which source MySQL database the Kafka messages came from. This
+        is used when doing lag calculations.
+        
+MYSQL_SOURCE_HOST
+        Required. The hostname of the MySQL instance to replicate from.
+
+MYSQL_SOURCE_PORT
+        Optional. The port that MySQL is listening on. If not present,
+        defaults to 3306.
+
+MYSQL_SOURCE_USER
+        Required. The MySQL user that is used for MySQL replication.
+
+MYSQL_SOURCE_PASSWORD
+        Required. The password corresponding to MYSQL_SOURCE_USER
+
+KAFKA_BROKER
+        Required. One of the Kafka brokers.
+
+KAFKA_PORT
+        Optional. If not present, will default to 9092.
+
+KAFKA_TOPIC_BASE
+        Required. The basename of the Kafka topic to write to. Rows
+        for a table foo.bar will be written to
+        KAFKA_TOPIC_BASE-foo.bar.

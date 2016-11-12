@@ -1,0 +1,47 @@
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+
+        dependencies {
+            classpath 'eu.appsatori:gradle-fatjar-plugin:0.2'
+        }
+    }
+}
+
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin:'application'
+
+eclipse {
+    classpath {
+        downloadJavadoc=true
+    }
+}
+
+mainClassName = 'com.tivo.wombat.replicator.Listener'
+
+run {
+    // when running via gradle, use the temp.properties
+    // from the build directory.
+    environment "CONFIG_FILE", "${projectDir}/temp.properties"
+}
+
+dependencies{
+    compile(group: 'com.github.shyiko', name: 'mysql-binlog-connector-java', version: '0.1.0')
+    compile(group: 'org.apache.commons', name: 'commons-lang3', version: '3.3.2')
+    compile(group: 'mysql', name: 'mysql-connector-java', version: '5.1.6')
+    compile(group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.4.4')
+    compile(group: 'org.apache.kafka', name: 'kafka-clients', version: '0.8.2.1')
+    testCompile(group: 'junit', name: 'junit', version: '4.12')
+}
+
+apply plugin: 'fatjar'
+fatJar {
+    manifest {
+        attributes("Main-Class": "com.tivo.wombat.replicator.Listener", "Implementation-Title": "Listener", "Implementation-Version": "0.0.1")
+    }
+}
